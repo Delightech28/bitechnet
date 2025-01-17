@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bi-TechNet Ventures</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="bi-technet.png" type="image/x-icon">
+
+  <style>
+    /* Hide default scrollbar */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  
+    body {
+      background-color: black;
+      color: white;
+      margin-bottom: 100px;
+    }
+  
+    /* Animations */
+    .title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      animation: slideInLeft 2s forwards;
+    }
+  
+    .subtext,
+    .image-container {
+      animation: slideInBottom 2s forwards;
+      font-family: 'Roboto', sans-serif; /* Ensures consistent font for subtext */
+    }
+  
+    .subtext {
+      margin-top: 20px;
+      font-size: 1rem; /* Size for Android view */
+    }
+  
+    /* Keyframe animations */
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+  
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  
+    @keyframes slideInBottom {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+  
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  
+    /* Mobile navigation styling */
+    .navbar {
+      background-color: black;
+    }
+  
+    .navbar-nav .nav-item .nav-link {
+      color: white;
+      transition: color 0.3s ease; /* Smooth hover transition */
+    }
+  
+    .navbar-nav .nav-item .nav-link:hover {
+      color: rgb(120, 72, 224); /* Change color on hover */
+    }
+  
+    .navbar-toggler {
+      border: 2px solid rgb(120, 72, 224);
+      border-radius: 5px;
+      font-size: 35px;
+    }
+  
+    .navbar-toggler:focus {
+      outline: none;
+    }
+  
+    /* Logo size on Android */
+    @media (max-width: 768px) {
+      .navbar-brand img {
+        width: 100px; /* Smaller logo for Android */
+      }
+    }
+  
+    /* Desktop Nav Styling */
+    @media (min-width: 769px) {
+      .navbar-expand-lg .navbar-collapse {
+        justify-content: center;
+      }
+  
+      .navbar-nav .nav-item .nav-link {
+        font-size: 1.1rem;
+        padding: 0 20px;
+      }
+  
+      .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+  
+      /* Reduce subtext size for PC view */
+      .subtext {
+        font-size: 1.2rem; /* Adjusted size for PC */
+      }
+    }
+  
+    /* Bottom navigation styling for mobile only */
+    .bottom-nav {
+      background-color: black;
+      border-radius: 50px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      height: 80px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      box-shadow: 0px 4px 15px rgb(120, 72, 224);
+    }
+  
+    .bottom-nav .nav-item {
+      text-align: center;
+    }
+  
+    .bottom-nav .nav-item i {
+      font-size: 1.5rem;
+      display: block;
+    }
+  
+    .bottom-nav .nav-item .nav-link {
+      color: white;
+      font-size: 0.8rem;
+    }
+  
+    .bottom-nav .nav-item .nav-link.active {
+      color: rgb(120, 72, 224);
+    }
+  
+    @media (min-width: 769px) {
+      .bottom-nav {
+        display: none;
+      }
+    }
+  
+    /* Right slide-in navigation animation */
+    .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+  
+    .sidenav a {
+      font-family: 'Open Sans', sans-serif;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 18px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 10px;
+    }
+  
+    .sidenav .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 36px;
+    }
+  
+    @media (min-width: 769px) {
+      .sidenav {
+        display: none;
+      }
+    }
+  
+    /* Social Media Links */
+    .social-links {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+  
+    .social-links a {
+      margin: 0 10px;
+      color: white;
+      font-size: 1.5rem;
+    }
+  
+    .social-links a:hover {
+      color: rgb(120, 72, 224);
+    }
+  
+    /* Title and Subtext for Desktop */
+    @media (min-width: 769px) {
+      .title {
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-top: 50px;
+        text-transform: uppercase;
+        line-height: 1.2;
+      }
+  
+      .subtext {
+        font-size: 1.2rem; /* Adjusted size for PC */
+        margin-top: 30px;
+        font-weight: 300;
+        line-height: 1.8;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+  
+      .image-container img {
+        max-width: 80%;
+        margin-top: -50px; /* Adjusted margin */
+      }
+  
+      .navbar-brand img {
+        width: 150px; /* Scales the logo appropriately for PC */
+      }
+    }
+  
+    /* Move development image up for Android view */
+    @media (max-width: 768px) {
+      .image-container img {
+        margin-top: -50px; /* Move the image up */
+      }
+
+      .grid{
+        display:grid;
+        grid-template-columns: repeat(2,1fr);
+      }
+
+      .app-section{
+        margin-top: 700px;
+      }
+    }
+
+    /* WHO WE ARE Section Styling */
+.who-we-are-section {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  padding: 60px 20px;
+  height: 600px;
+  font-family: 'Poppins', sans-serif; /* Matching the font-family in the image */
+}
+
+.who-we-are-container h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.who-we-are-text {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* APP DESIGN Section Styling */
+.app-design-section {
+ background-color: white;
+ border-radius: 20px;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.app-design-border {
+  border: 2px solid rgb(120, 72, 224);
+  border-radius: 20px;
+  padding: 20px;
+  width: 480px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-design-icon {
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.app-design-section h3 {
+  font-size: 2rem;
+  color: rgb(120, 72, 224);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.app-design-text {
+  font-size: 1rem;
+  color: #707070;
+  margin-bottom: 20px;
+}
+
+.app-design-link img {
+  width: 30px;
+  position: absolute;
+  bottom: -15px; /* Positioning the arrow icon outside the border */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.why-us-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(120, 72, 224);
+  text-align: center;
+  margin-top: 750px;
+}
+.underline {
+  width: 50px;
+  height: 4px;
+  background-color: #00c7ff;
+  margin: 10px auto;
+}
+.why-us-text {
+  text-align: center;
+  color: #6c757d;
+  margin: 20px auto;
+  max-width: 600px;
+}
+.stats-box {
+  margin-top: 40px;
+}
+.stats-box .stat-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: rgb(120, 72, 224);
+}
+.stats-box .stat-label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #6c757d;
+}
+.stat-divider {
+  border-top: 2px solid #00c7ff;
+  width: 50px;
+  margin: 10px auto;
+}
+.xtraweb-img {
+  display: block;
+  margin: 20px auto;
+  max-width: 200px;
+}
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: rgb(120, 72, 224);
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+/* App Development */
+.app-section {
+  text-align: center;
+  padding: 50px 20px;
+
+  
+}
+.app-section h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.app-section p {
+  font-size: 1.1rem;
+  margin: 20px 0;
+}
+.app-section .feature-list {
+  margin-top: 20px;
+}
+.app-section .feature-list div {
+  margin: 10px 0;
+}
+.feature-icon {
+  color: #007bff;
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+.app-buttons {
+  margin-top: 30px;
+}
+.app-buttons .btn {
+  width: 180px;
+  margin: 10px;
+  font-size: 1rem;
+}
+.btn-ios {
+  background-color: #007bff;
+  color: white;
+}
+.btn-android {
+  background-color: #28a745;
+  color: white;
+}
+.btn-ios i, .btn-android i {
+  margin-right: 10px;
+}
+
+.container {
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.social-icons a {
+  color: white;
+  font-size: 24px;
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+.social-icons a:hover {
+  color: rgb(120, 72, 224);
+}
+.social-icons i {
+  padding: 10px;
+}
+  </style>
+  
+  
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="bi-technet.png" alt="Bi-TechNet">
+      </a>
+      <button class="navbar-toggler" type="button" onclick="openNav()">
+        <i class="fas fa-bars" style="color: white;"></i>
+      </button>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#service">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Side Navigation for Mobile -->
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeNav()">&times;</a>
+    <a href="index.html">Home</a>
+    <a href="#about">About</a>
+    <a href="#service">Services</a>
+    <a href="contact.html">Contact</a>
+
+    <!-- Social Media Links and Copyright -->
+    <div class="social-links">
+      <a href="#"><i class="bi bi-facebook"></i></a>
+      <a href="#"><i class="bi bi-linkedin"></i></a>
+      <a href="#"><i class="bi bi-x"></i></a>
+      <a href="#"><i class="bi bi-youtube"></i></a>
+      <a href="#"><i class="bi bi-skype"></i></a>
+    </div>
+
+    <p class="text-center mt-2 mb-0" style="color: white;">Copyright © 2024</p>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container text-center mt-5">
+    <h1 class="title">Pioneering Technology Skill Consulting Excellence</h1>
+    <p class="subtext">We create innovative web designs that meet your business needs and foster growth in today's digital society.</p>
+    <div class="dev-img image-container mt-4">
+      <img src="development.png" class="img-fluid" alt="Website Screenshot">
+    </div>
+  </div>
+
+ <!-- WHO WE ARE Section -->
+<div class="who-we-are-section" id="about">
+  <div class="who-we-are-container text-center">
+      <h2>WHO WE ARE?</h2>
+      <p class="who-we-are-text">
+          Web design encompasses many different skills and disciplines in the production and maintenance of websites. The different areas of web design include web graphic design; interface design; authoring, including standardised code and proprietary software; user experience design; and search engine optimization.
+      </p>
+  </div>
+
+  <!-- Add this inside your body where you want the sections to appear -->
+<div class="container">
+    <div class="row">
+        <!-- App Design Section -->
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="app-design-section">
+                <div class="app-design-border">
+                    <img src="app_design.png" alt="App Design" class="app-design-icon">
+                    <h3>App Design</h3>
+                    <p class="app-design-text">The different areas of web design include web graphic design.</p>
+                    
+                </div>
+            </div>
+        </div>
+
+         <!-- App Design Section -->
+         <div class="col-lg-4 col-md-6 mb-4">
+          <div class="app-design-section">
+              <div class="app-design-border">
+                  <img src="web design.png" alt="Web Design" class="app-design-icon">
+                  <h3>Web Design</h3>
+                  <p class="app-design-text">The different areas of web design include web graphic design.</p>
+                  
+              </div>
+          </div>
+      </div>
+
+        <!-- Soe and social Section -->
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="app-design-section">
+              <div class="app-design-border">
+                  <img src="seo and social.png" alt="Seo and Social" class="app-design-icon">
+                  <h3>Seo and Social</h3>
+                  <p class="app-design-text">The different areas of web design include web graphic design.</p>
+                  
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+
+</div>
+
+<!-- <section class="why-us-section">
+  <h2 class="why-us-title">WHY US?</h2>
+  <div class="underline"></div>
+  <p class="why-us-text">
+    Web design encompasses many different skills and disciplines in the production and maintenance of websites. 
+    The different areas of web design include web graphic design interface design.
+  </p>
+
+  <img src="bi-technet.png" alt="Bi-Technet" class="xtraweb-img">
+  
+  <div class="container stats-box">
+    <div class="grid row text-center">
+      <div class="col-md-3">
+        <div class="stat-number">250+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">HAPPY CLIENTS</div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-number">37</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">BRANCHES</div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-number">400+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">PROJECTS</div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-number">12+</div>
+        <div class="stat-divider"></div>
+        <div class="stat-label">YEARS OF EXPERIENCE</div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<section class="app-section">
+  <h2>APP DEVELOPMENT</h2>
+  <p>
+      App development encompasses many different skills and disciplines in the production and maintenance of websites. 
+      App development encompasses many different skills and disciplines in the production and maintenance of websites.
+  </p>
+ 
+  <div class="row feature-list justify-content-center">
+      <div class="col-6 col-md-3">
+          <i class="feature-icon fas fa-check-circle"></i>
+          iOS & Android
+      </div>
+      <div class="col-6 col-md-3">
+          <i class="feature-icon fas fa-check-circle"></i>
+          Windows Phone
+      </div>
+      <div class="col-6 col-md-3">
+          <i class="feature-icon fas fa-check-circle"></i>
+          Fast & Secure
+      </div>
+      <div class="col-6 col-md-3">
+          <i class="feature-icon fas fa-check-circle"></i>
+          Global Design
+      </div>
+  </div>
+
+  <!-- iOS and Android App Buttons Section -->
+  <div class="app-buttons">
+    <a href="#" class="btn btn-ios">
+        <i class="fab fa-apple"></i> iOS Apps
+    </a>
+    <a href="#" class="btn btn-android">
+        <i class="fab fa-android"></i> Android Apps
+    </a>
+</div>
+</section>
+
+<div class="container" id="service">
+  <h1 class="mb-4" style="font-weight: 500; font-size:40px;"><span style="color: rgb(120, 72, 224);">TECHNET</span> HUB</h1>
+  <p>Bi-TechNet Coders Hub is a dynamic WhatsApp community designed for coding enthusiasts of all levels. Whether you're a 
+  complete beginner or an experienced programmer, our community offers a platform to learn, collaborate, and challenge yourself with 
+  real-world coding projects.</p>
+  <p>We foster an environment of growth, where members can share knowledge, solve problems together, and stay motivated through regular 
+coding challenges. Hosted by Bi-TechNet Ventures, our goal is to help you sharpen your skills, build your portfolio, and become part of a 
+thriving network of passionate developers.</p>
+
+  <div class="social-icons mt-4">
+      <a href="#"><i class="bi bi-facebook"></i></a>
+      <a href="#"><i class="bi bi-x"></i></a>
+      <a href="#"><i class="bi bi-linkedin"></i></a>
+      <a href="#"><i class="bi bi-instagram"></i></a>
+      <a href="mailto:bitechnetventures@gmail.com"><i class="bi bi-envelope"></i></a>
+  </div>
+</div>
+
+  <!-- Bottom Navigation for Mobile -->
+  <div class="bottom-nav">
+    <div class="nav-item">
+      <a class="nav-link active" href="index.html">
+        <i class="fas fa-home"></i> Home
+      </a>
+    </div>
+    <div class="nav-item">
+      <a class="nav-link" href="#about">
+        <i class="fas fa-info-circle"></i> About
+      </a>
+    </div>
+    <!-- <div class="nav-item"> 
+      <a class="nav-link" href="#">
+        <i class="fas fa-users"></i> Clients
+      </a> 
+    </div> -->
+    <div class="nav-item">
+      <a class="nav-link" href="#service">
+        <i class="fas fa-cogs"></i> Services
+      </a>
+    </div>
+  </div>
+
+  <!-- JS for Side Nav -->
+  <script>
+    function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+    }
+  </script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
